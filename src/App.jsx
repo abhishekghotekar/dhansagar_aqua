@@ -20,6 +20,7 @@ import LoadingScreen from './components/LoadingScreen';
 import CustomCursor from './components/CustomCursor';
 import Chatbot from './components/Chatbot';
 import WaveDivider from './components/WaveDivider';
+import FloatingBubbles from './components/FloatingBubbles';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -45,6 +46,7 @@ function App() {
                 <div className="mesh-circle circle-2"></div>
                 <div className="mesh-circle circle-3"></div>
               </div>
+              <FloatingBubbles />
               <motion.div 
                 key="content"
                 initial={{ opacity: 0 }}

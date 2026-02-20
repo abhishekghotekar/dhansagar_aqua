@@ -812,6 +812,28 @@ html {
   cursor: pointer;
 }
 
+/* Bubbles */
+.bubbles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
 /* Responsive Overrides */
 @media (max-width: 1200px) {
   :root { --section-padding: 80px 5%; }
