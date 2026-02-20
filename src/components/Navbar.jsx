@@ -31,8 +31,30 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="nav-left desktop-only">
-        <div className="lang-switcher">
+      <div className="nav-left">
+        <motion.div 
+          className="logo"
+          whileHover={{ scale: 1.05 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{ cursor: 'pointer' }}
+        >
+          <Droplet className="logo-icon" size={24} />
+          <span>Dhansagar Aqua</span>
+        </motion.div>
+      </div>
+
+      {/* Desktop Links */}
+      <ul className="nav-links desktop-only">
+        {navItems.map((item) => (
+          <motion.li key={item} whileHover={{ y: -2 }}>
+            <a href={`#${item}`}>{t(`nav.${item}`)}</a>
+          </motion.li>
+        ))}
+      </ul>
+
+      <div className="nav-actions">
+        {/* Desktop Language Switcher */}
+        <div className="lang-switcher desktop-only">
           <button className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
             <Globe size={18} />
             <span>{currentLangName}</span>
@@ -60,31 +82,13 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </div>
-      </div>
 
-      <motion.div 
-        className="logo"
-        whileHover={{ scale: 1.05 }}
-      >
-        <Droplet className="logo-icon" />
-        <span>Dhansagar Aqua</span>
-      </motion.div>
-
-      {/* Desktop Links */}
-      <ul className="nav-links desktop-only">
-        {navItems.map((item) => (
-          <motion.li key={item} whileHover={{ y: -2 }}>
-            <a href={`#${item}`}>{t(`nav.${item}`)}</a>
-          </motion.li>
-        ))}
-      </ul>
-
-      <div className="nav-actions">
         <motion.button 
           className="theme-toggle" 
           onClick={toggleTheme}
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.1 }}
+          aria-label="Toggle Theme"
         >
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </motion.button>
@@ -93,6 +97,7 @@ const Navbar = () => {
         <button 
           className="mobile-menu-btn" 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

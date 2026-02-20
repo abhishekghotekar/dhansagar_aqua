@@ -22,11 +22,11 @@ const Contact = () => {
                     </div>
                     <div className="contact-item">
                         <Phone className="contact-icon" />
-                        <span>{t('contact.phone')}</span>
+                        <a href="tel:+919922616054">{t('contact.phone')}</a>
                     </div>
                     <div className="contact-item">
                         <MessageSquare className="contact-icon" />
-                        <span>{t('contact.whatsapp')}</span>
+                        <a href="https://wa.me/919922616054" target="_blank" rel="noopener noreferrer">{t('contact.whatsapp')}</a>
                     </div>
                     <div className="contact-item">
                         <User className="contact-icon" />

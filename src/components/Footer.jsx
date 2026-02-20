@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Droplet, Facebook, Instagram, Phone } from 'lucide-react';
+import { Droplet, Facebook, Instagram, Phone, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
     const { t } = useLanguage();
@@ -13,9 +13,10 @@ const Footer = () => {
                     <span>Dhansagar Aqua</span>
                 </div>
                 <div className="footer-socials">
-                    <a href="#"><Facebook /></a>
-                    <a href="#"><Instagram /></a>
-                    <a href="tel:+919922616054"><Phone /></a>
+                    <a href="#" aria-label="Facebook"><Facebook /></a>
+                    <a href="#" aria-label="Instagram"><Instagram /></a>
+                    <a href="https://wa.me/919922616054" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><MessageCircle /></a>
+                    <a href="tel:+919922616054" aria-label="Phone"><Phone /></a>
                 </div>
             </div>
             <div className="footer-bottom">

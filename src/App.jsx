@@ -19,6 +19,7 @@ import LoadingScreen from './components/LoadingScreen';
 
 import CustomCursor from './components/CustomCursor';
 import Chatbot from './components/Chatbot';
+import WhatsAppButton from './components/WhatsAppButton';
 import WaveDivider from './components/WaveDivider';
 import FloatingBubbles from './components/FloatingBubbles';
 
@@ -36,6 +37,7 @@ function App() {
       <LanguageProvider>
         <CustomCursor />
         <Chatbot />
+        <WhatsAppButton />
         <AnimatePresence>
           {isLoading ? (
             <LoadingScreen key="loading" />
