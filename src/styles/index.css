@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Mukta:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #0077b6;
+  --primary-light: #48cae4;
+  --primary-dark: #023e8a;
+  --accent: #caf0f8;
+  --white: #ffffff;
+  --text: #1f2937;
+  --text-light: #4b5563;
+  --bg-gradient: linear-gradient(-45deg, #f0f9ff, #e0f2fe, #caf0f8, #f0f9ff);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] {
+  --white: #0f172a;
+  --text: #f1f5f9;
+  --text-light: #94a3b8;
+  --bg-gradient: linear-gradient(-45deg, #0f172a, #1e293b, #030712, #0f172a);
+  --glass: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent: #1e293b;
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', 'Mukta', sans-serif;
+  color: var(--text);
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Section Waves */
+.wave-divider {
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.wave-divider svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 50px;
+}
+
+.wave-divider.top { transform: rotate(180deg); }
+
+/* Ripple Button Effect Helper */
+.ripple-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.ripple-button:active::after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
