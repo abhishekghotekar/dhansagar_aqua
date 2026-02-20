@@ -31,34 +31,8 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <motion.div 
-        className="logo"
-        whileHover={{ scale: 1.05 }}
-      >
-        <Droplet className="logo-icon" />
-        <span>Dhansagar Aqua</span>
-      </motion.div>
-
-      {/* Desktop Links */}
-      <ul className="nav-links desktop-only">
-        {navItems.map((item) => (
-          <motion.li key={item} whileHover={{ y: -2 }}>
-            <a href={`#${item}`}>{t(`nav.${item}`)}</a>
-          </motion.li>
-        ))}
-      </ul>
-
-      <div className="nav-actions">
-        <motion.button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.1 }}
-        >
-          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-        </motion.button>
-
-        <div className="lang-switcher desktop-only">
+      <div className="nav-left desktop-only">
+        <div className="lang-switcher">
           <button className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
             <Globe size={18} />
             <span>{currentLangName}</span>
@@ -86,6 +60,34 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </div>
+      </div>
+
+      <motion.div 
+        className="logo"
+        whileHover={{ scale: 1.05 }}
+      >
+        <Droplet className="logo-icon" />
+        <span>Dhansagar Aqua</span>
+      </motion.div>
+
+      {/* Desktop Links */}
+      <ul className="nav-links desktop-only">
+        {navItems.map((item) => (
+          <motion.li key={item} whileHover={{ y: -2 }}>
+            <a href={`#${item}`}>{t(`nav.${item}`)}</a>
+          </motion.li>
+        ))}
+      </ul>
+
+      <div className="nav-actions">
+        <motion.button 
+          className="theme-toggle" 
+          onClick={toggleTheme}
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
+        >
+          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+        </motion.button>
 
         {/* Mobile Menu Toggle */}
         <button 

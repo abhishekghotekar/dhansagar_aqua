@@ -6,6 +6,7 @@
   --primary-dark: #0077b6;
   --accent: #caf0f8;
   --bg-main: #ffffff;
+  --white: var(--bg-main);
   --text: #03045e;
   --text-light: #0077b6;
   --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #caf0f8 100%);
