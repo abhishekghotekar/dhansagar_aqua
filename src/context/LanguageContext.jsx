@@ -6,7 +6,7 @@ import { hi } from '../translations/hi';
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-    const [lang, setLang] = useState(localStorage.getItem('preferredLang') || 'en');
+    const [lang, setLang] = useState(localStorage.getItem('preferredLang') || 'mr');
     
     const translations = {
         en: en,
