@@ -1,29 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Mukta:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Mukta:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #0077b6;
-  --primary-light: #48cae4;
-  --primary-dark: #023e8a;
+  --primary: #00b4d8;
+  --primary-light: #90e0ef;
+  --primary-dark: #0077b6;
   --accent: #caf0f8;
-  --white: #ffffff;
-  --text: #1f2937;
-  --text-light: #4b5563;
-  --bg-gradient: linear-gradient(-45deg, #f0f9ff, #e0f2fe, #caf0f8, #f0f9ff);
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-main: #ffffff;
+  --text: #03045e;
+  --text-light: #0077b6;
+  --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #caf0f8 100%);
+  --glass: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --section-padding: 100px 10%;
+  --container-max: 1200px;
+  --nav-height: 70px;
 }
 
 [data-theme='dark'] {
-  --white: #0f172a;
-  --text: #f1f5f9;
-  --text-light: #94a3b8;
-  --bg-gradient: linear-gradient(-45deg, #0f172a, #1e293b, #030712, #0f172a);
-  --glass: rgba(15, 23, 42, 0.8);
+  --bg-main: #020617;
+  --text: #f0f9ff;
+  --text-light: #90e0ef;
+  --bg-gradient: linear-gradient(135deg, #020617 0%, #03045e 50%, #023e8a 100%);
+  --glass: rgba(3, 4, 94, 0.4);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --accent: #1e293b;
-  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --accent: #023e8a;
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -32,25 +35,116 @@
   box-sizing: border-box;
 }
 
+/* Custom Cursor Styles */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+}
+
+/* Noise Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9998;
+  filter: contrast(120%) brightness(120%);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Poppins', 'Mukta', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Mukta', sans-serif;
   color: var(--text);
   background: var(--bg-gradient);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background-attachment: fixed;
   line-height: 1.6;
   overflow-x: hidden;
   transition: background 0.4s ease, color 0.4s ease;
+  cursor: none; /* Hide default cursor */
 }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@media (max-width: 1024px) {
+  body { cursor: auto; }
+  .custom-cursor, .custom-cursor-dot { display: none; }
+}
+
+/* Background Mesh */
+.bg-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.mesh-circle {
+  position: absolute;
+  filter: blur(100px);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: mesh-float 20s infinite ease-in-out;
+}
+
+.circle-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--primary);
+  top: -200px;
+  right: -100px;
+}
+
+.circle-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--primary-light);
+  bottom: -150px;
+  left: -100px;
+  animation-delay: -5s;
+}
+
+.circle-3 {
+  width: 300px;
+  height: 300px;
+  background: #a5f3fc;
+  top: 40%;
+  right: 20%;
+  animation-delay: -10s;
+  opacity: 0.2;
+}
+
+@keyframes mesh-float {
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  33% { transform: translateY(-30px) scale(1.1) rotate(20deg); }
+  66% { transform: translateY(20px) scale(0.9) rotate(-20deg); }
 }
 
 /* Section Waves */
@@ -63,7 +157,7 @@ body {
 .wave-divider svg {
   display: block;
   width: calc(100% + 1.3px);
-  height: 50px;
+  height: 60px;
 }
 
 .wave-divider.top { transform: rotate(180deg); }
@@ -96,3 +190,4 @@ body {
   opacity: .3;
   transition: 0s;
 }
+

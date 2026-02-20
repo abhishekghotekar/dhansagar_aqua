@@ -17,6 +17,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 
+import CustomCursor from './components/CustomCursor';
+import Chatbot from './components/Chatbot';
 import WaveDivider from './components/WaveDivider';
 
 function App() {
@@ -31,35 +33,44 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        <CustomCursor />
+        <Chatbot />
         <AnimatePresence>
           {isLoading ? (
             <LoadingScreen key="loading" />
           ) : (
-            <motion.div 
-              key="content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="app-container"
-            >
-              <Navbar />
-              <main>
-                <Hero />
-                <WaveDivider flip />
-                <About />
-                <WaveDivider />
-                <Process />
-                <WaveDivider flip />
-                <Services />
-                <WaveDivider />
-                <Pricing />
-                <WaveDivider flip />
-                <FAQ />
-                <WaveDivider />
-                <Contact />
-              </main>
-              <Footer />
-            </motion.div>
+            <>
+              <div className="bg-mesh">
+                <div className="mesh-circle circle-1"></div>
+                <div className="mesh-circle circle-2"></div>
+                <div className="mesh-circle circle-3"></div>
+              </div>
+              <motion.div 
+                key="content"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="app-container"
+              >
+                <Navbar />
+                <main>
+                  <Hero />
+                  <WaveDivider flip />
+                  <About />
+                  <WaveDivider />
+                  <Process />
+                  <WaveDivider flip />
+                  <Services />
+                  <WaveDivider />
+                  <Pricing />
+                  <WaveDivider flip />
+                  <FAQ />
+                  <WaveDivider />
+                  <Contact />
+                </main>
+                <Footer />
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </LanguageProvider>

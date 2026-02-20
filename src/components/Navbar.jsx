@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Droplet, Globe, ChevronDown, Moon, Sun } from 'lucide-react';
+import { Droplet, Globe, ChevronDown, Moon, Sun, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
@@ -9,6 +9,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +27,8 @@ const Navbar = () => {
 
   const currentLangName = languages.find(l => l.code === lang)?.name;
 
+  const navItems = ['home', 'about', 'process', 'services', 'pricing', 'contact'];
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <motion.div 
@@ -36,8 +39,9 @@ const Navbar = () => {
         <span>Dhansagar Aqua</span>
       </motion.div>
 
-      <ul className="nav-links">
-        {['home', 'about', 'process', 'services', 'pricing', 'contact'].map((item) => (
+      {/* Desktop Links */}
+      <ul className="nav-links desktop-only">
+        {navItems.map((item) => (
           <motion.li key={item} whileHover={{ y: -2 }}>
             <a href={`#${item}`}>{t(`nav.${item}`)}</a>
           </motion.li>
@@ -54,7 +58,7 @@ const Navbar = () => {
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </motion.button>
 
-        <div className="lang-switcher">
+        <div className="lang-switcher desktop-only">
           <button className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
             <Globe size={18} />
             <span>{currentLangName}</span>
@@ -82,7 +86,57 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="mobile-menu-btn" 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            className="mobile-menu"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+          >
+            <ul className="mobile-nav-links">
+              {navItems.map((item) => (
+                <motion.li 
+                  key={item}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <a href={`#${item}`} onClick={() => setIsMobileMenuOpen(false)}>
+                    {t(`nav.${item}`)}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+            <div className="mobile-lang-switcher">
+              <p>{t('nav.selectLanguage') || 'Select Language'}:</p>
+              <div className="mobile-lang-btns">
+                {languages.map(l => (
+                  <button 
+                    key={l.code}
+                    className={lang === l.code ? 'active' : ''}
+                    onClick={() => { changeLanguage(l.code); setIsMobileMenuOpen(false); }}
+                  >
+                    {l.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

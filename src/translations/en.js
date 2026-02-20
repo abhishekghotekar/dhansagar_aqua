@@ -5,7 +5,8 @@ export const en = {
         process: "Process",
         services: "Services",
         pricing: "Pricing",
-        contact: "Contact"
+        contact: "Contact",
+        selectLanguage: "Select Language"
     },
     hero: {
         title1: "Pure Water,",
@@ -81,5 +82,14 @@ export const en = {
     footer: {
         rights: "All Rights Reserved",
         designed: "Designed with ❤️ for Dhansagar Aqua"
+    },
+    chatbot: {
+        welcome: "Hello! Welcome to Dhansagar Aqua. How can I help you today?",
+        placeholder: "Type your message...",
+        assistant: "Aqua Assistant",
+        online: "Online",
+        defaultResponse: "Thank you for reaching out! Our team will get back to you soon. For urgent queries, call us at +91 9922616054.",
+        priceResponse: "We have plans starting from ₹300/month. You can find detailed pricing in our Pricing section!",
+        serviceResponse: "We provide 20L jar delivery, RO maintenance, and water testing services for homes and offices."
     }
 };

@@ -52,39 +52,45 @@ const Hero = () => {
       <motion.div 
         className="hero-content"
         style={{ y: yContent, opacity: opacityContent }}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       >
         <motion.h1
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
+          initial={{ clipPath: 'inset(100% 0 0 0)' }}
+          animate={{ clipPath: 'inset(0% 0 0 0)' }}
+          transition={{ delay: 0.2, duration: 1, ease: "circOut" }}
         >
           <span>{t('hero.title1')}</span>
-          <motion.span 
-            className="accent"
-            animate={{ color: ['#0077b6', '#48cae4', '#0077b6'] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
+          <span className="accent">
             {t('hero.title2')}
-          </motion.span>
+          </span>
         </motion.h1>
         <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
         >
           {t('hero.subtitle')}
         </motion.p>
-        <motion.a 
-          href="tel:+919922616054" 
-          className="cta-btn ripple-button"
-          whileHover={{ scale: 1.05, boxShadow: "0 15px 30px rgba(0, 119, 182, 0.4)" }}
-          whileTap={{ scale: 0.95 }}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
         >
-          {t('hero.cta')}
-        </motion.a>
+          <motion.a 
+            href="tel:+919922616054" 
+            className="cta-btn ripple-button"
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 20px 40px rgba(0, 119, 182, 0.3)",
+              background: "var(--primary-dark)"
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {t('hero.cta')}
+          </motion.a>
+        </motion.div>
       </motion.div>
 
       <div className="waves-container">
