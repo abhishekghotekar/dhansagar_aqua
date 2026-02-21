@@ -13,38 +13,64 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
     // Business details
     const upiId = "9922616054@ybl";
     const payeeName = "ABHISHEK CHAGAN GHOTEKAR";
-    const amount = price ? price.replace(/[^0-9]/g, '') : '';
+
+    // Helper to extract numeric value regardless of language (handles Devanagari digits)
+    const getNumericAmount = (priceStr) => {
+        if (!priceStr) return 0;
+        // Convert Devanagari digits to English digits
+        const devanagariRange = "०१२३४५६७८९";
+        const englishDigits = priceStr.replace(/[०-९]/g, d => devanagariRange.indexOf(d));
+        // Extract the first sequence of numbers
+        const match = englishDigits.match(/\d+/);
+        return match ? parseInt(match[0]) : 0;
+    };
+
+    const numericAmount = getNumericAmount(price);
     
     // Links for direct UPI fallback
     const transactionNote = encodeURIComponent(`Payment for ${product}`);
-    const genericUpi = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR${amount ? `&am=${amount}` : ''}&tn=${transactionNote}`;
-    const phonepeLink = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR${amount ? `&am=${amount}` : ''}&tn=${transactionNote}`;
+    const genericUpi = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR${numericAmount ? `&am=${numericAmount}` : ''}&tn=${transactionNote}`;
+    const phonepeLink = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR${numericAmount ? `&am=${numericAmount}` : ''}&tn=${transactionNote}`;
 
     const handleRazorpayPayment = async () => {
         try {
             setIsLoading(true);
             const backendUrl = import.meta.env.VITE_BACKEND_URL;
+            const rzpKey = import.meta.env.VITE_RAZORPAY_KEY || "rzp_test_pJSvR5A5nN4nJS";
+
+            if (!numericAmount || numericAmount <= 0) {
+                throw new Error("Invalid amount detected");
+            }
             
+            console.log("Initializing payment:", { product, numericAmount, backendUrl });
+
             // 1. Create order on backend
             const orderResponse = await fetch(`${backendUrl}/api/v1/payments/create-order`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    amount: parseInt(amount) * 100, // Amount in paise
+                    amount: numericAmount * 100, // Amount in paise
                     currency: "INR",
                     receipt: `rcpt_${Math.random().toString(36).substring(7)}`,
-                    notes: { product_name: product }
+                    notes: { 
+                        product_name: product,
+                        platform: "web_vercel"
+                    }
                 })
             });
 
-            if (!orderResponse.ok) throw new Error("Failed to create order");
+            if (!orderResponse.ok) {
+                const errorData = await orderResponse.json().catch(() => ({}));
+                console.error("Backend order error:", errorData);
+                throw new Error(errorData.detail || "Failed to create order");
+            }
             
             const orderData = await orderResponse.json();
+            console.log("Order created successfully:", orderData);
 
             // 2. Open Razorpay Checkout
-            // Note: Replace with actual Key ID or use env variable
             const options = {
-                key: import.meta.env.VITE_RAZORPAY_KEY || "rzp_test_pJSvR5A5nN4nJS", 
+                key: rzpKey,
                 amount: orderData.amount,
                 currency: orderData.currency,
                 name: "Dhansagar Aqua",
@@ -53,6 +79,8 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
                 handler: async (response) => {
                     try {
                         setIsLoading(true);
+                        console.log("Payment authorized, verifying...", response);
+                        
                         // 3. Verify payment on backend
                         const verifyRes = await fetch(`${backendUrl}/api/v1/payments/verify-payment`, {
                             method: 'POST',
@@ -65,25 +93,32 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
                         });
 
                         if (verifyRes.ok) {
-                            alert("Payment Successful!");
+                            console.log("Payment verified successfully");
+                            alert("Payment Successful! Thank you for choosing Dhansagar Aqua.");
                             onClose();
                         } else {
-                            throw new Error("Verification failed");
+                            const verifyError = await verifyRes.json().catch(() => ({}));
+                            throw new Error(verifyError.detail || "Verification failed");
                         }
                     } catch (err) {
-                        console.error(err);
-                        alert("Payment verification failed. Please contact support.");
+                        console.error("Verification error:", err);
+                        alert(`Payment verification failed: ${err.message}. Please contact 9922616054.`);
                     } finally {
                         setIsLoading(false);
                     }
                 },
                 prefill: {
                     name: "Customer",
-                    email: "",
                     contact: "9922616054"
                 },
                 theme: {
                     color: "#00b4d8"
+                },
+                modal: {
+                    ondismiss: () => {
+                        console.log("Payment modal closed by user");
+                        setIsLoading(false);
+                    }
                 }
             };
 
@@ -92,7 +127,7 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
 
         } catch (error) {
             console.error("Payment initialization error:", error);
-            alert("Could not initialize payment. Please try again.");
+            alert(`Could not initialize payment: ${error.message}. Please use the QR code or try again.`);
         } finally {
             setIsLoading(false);
         }
