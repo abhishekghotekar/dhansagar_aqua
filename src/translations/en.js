@@ -12,7 +12,8 @@ export const en = {
         title1: "Pure Water,",
         title2: "Healthy Life",
         subtitle: "Clean and Safe Drinking Water Delivered to Your Doorstep",
-        cta: "Order Now"
+        cta: "Order Now",
+        payNow: "Pay Now"
     },
     about: {
         title: "About Us",
@@ -48,7 +49,8 @@ export const en = {
         jarPrice: "₹30",
         liter: "Water Refill",
         literPrice: "₹1 / Liter",
-        order: "Call to Order"
+        order: "Call to Order",
+        payOnline: "Pay Online"
     },
     why: {
         title: "Why Choose Us?",

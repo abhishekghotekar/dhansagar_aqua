@@ -1012,3 +1012,244 @@ html {
   .chat-window { bottom: 85px; right: 0; width: 100vw; border-radius: 0; height: 80vh; max-height: 500px; }
   .stats { flex-direction: column; align-items: center; text-align: center; }
 }
+/* Payment Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  padding: 20px;
+}
+
+.payment-modal {
+  background: var(--white);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 30px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  color: var(--text);
+}
+
+[data-theme='dark'] .payment-modal {
+  background: #111827;
+  border: 1px solid var(--glass-border);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.close-modal:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--primary);
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.modal-header h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: var(--primary-dark);
+}
+
+.brand-badge {
+  background: #5f259f;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+
+.modal-header .highlight {
+  color: #5f259f;
+  font-weight: 800;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.qr-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.qr-container {
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.qr-hint {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.divider span {
+  padding: 0 15px;
+}
+
+.direct-pay-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upi-btn {
+  color: white;
+  text-decoration: none;
+  padding: 14px 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  transition: var(--transition);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.phonepe-btn {
+  background: #5f259f; /* PhonePe Purple */
+}
+
+.phonepe-btn:hover {
+  background: #4a1d7d;
+}
+
+.btn-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.secondary-upi {
+  background: #00b4d8;
+  color: white;
+}
+
+.secondary-upi:hover {
+  background: #0077b6;
+}
+
+.modal-footer {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: center;
+}
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.pricing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.pay-online-btn {
+  background: transparent;
+  color: #5f259f;
+  border: 2px solid #5f259f;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+  justify-content: center;
+}
+
+.pay-online-btn:hover {
+  background: #5f259f;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pay-now-hero {
+  background: #5f259f !important;
+  box-shadow: 0 10px 25px rgba(95, 37, 159, 0.3) !important;
+}
+
+.pay-now-hero:hover {
+  background: #4a1d7d !important;
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
+}

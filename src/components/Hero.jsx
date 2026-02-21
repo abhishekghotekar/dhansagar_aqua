@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { CreditCard } from 'lucide-react';
+import PaymentModal from './PaymentModal';
 
 const Hero = () => {
   const { t } = useLanguage();
   const { scrollY } = useScroll();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const yContent = useTransform(scrollY, [0, 500], [0, 150]);
   const opacityContent = useTransform(scrollY, [0, 300], [1, 0]);
@@ -74,6 +77,7 @@ const Hero = () => {
           {t('hero.subtitle')}
         </motion.p>
         <motion.div
+          className="hero-actions"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
@@ -90,8 +94,28 @@ const Hero = () => {
           >
             {t('hero.cta')}
           </motion.a>
+          
+          <motion.button 
+            className="cta-btn pay-now-hero ripple-button"
+            onClick={() => setIsModalOpen(true)}
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 20px 40px rgba(95, 37, 159, 0.3)",
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <CreditCard size={20} />
+            {t('hero.payNow')}
+          </motion.button>
         </motion.div>
       </motion.div>
+
+      <PaymentModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        product={t('pricing.jar')} 
+        price={t('pricing.jarPrice')} 
+      />
 
       <div className="waves-container">
         <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
