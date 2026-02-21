@@ -36,10 +36,11 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
         try {
             setIsLoading(true);
             const backendUrl = import.meta.env.VITE_BACKEND_URL;
-            const rzpKey = import.meta.env.VITE_RAZORPAY_KEY || "rzp_test_pJSvR5A5nN4nJS";
+            const rzpKey = import.meta.env.VITE_RAZORPAY_KEY || "rzp_test_SIqwr1yuLa2NaH";
 
             if (!numericAmount || numericAmount <= 0) {
-                throw new Error("Invalid amount detected");
+                console.error("Invalid amount:", { price, numericAmount });
+                throw new Error("Invalid amount detected. Please refresh and try again.");
             }
             
             console.log("Initializing payment:", { product, numericAmount, backendUrl });
@@ -67,6 +68,7 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
             
             const orderData = await orderResponse.json();
             console.log("Order created successfully:", orderData);
+            console.log("Using Razorpay Key:", rzpKey.substring(0, 12) + "...");
 
             // 2. Open Razorpay Checkout
             const options = {
