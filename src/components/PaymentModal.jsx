@@ -15,8 +15,9 @@ const PaymentModal = ({ isOpen, onClose, product, price }) => {
     const amount = price ? price.replace(/[^0-9]/g, '') : '';
     
     // Links
-    const genericUpi = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
-    const phonepeLink = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
+    const transactionNote = encodeURIComponent(`Payment for ${product}`);
+    const genericUpi = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR${amount ? `&am=${amount}` : ''}&tn=${transactionNote}`;
+    const phonepeLink = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR${amount ? `&am=${amount}` : ''}&tn=${transactionNote}`;
 
     return (
         <AnimatePresence>

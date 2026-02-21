@@ -17,9 +17,10 @@ export const en = {
     },
     about: {
         title: "About Us",
-        desc: "Dhansagar Aqua is dedicated to providing the purest drinking water to our community. Led by Dhansagar Jorvekar, we ensure that every drop meets the highest standards of safety and hygiene.",
+        desc: "Dhansagar Aqua & Ice provides pure and chilled drinking water. Located at Talegaon Dighe, Loni Road, we specialize in high-quality purifier water for households and events. We also provide ice and ice cream services.",
         experience: "Years of Trust",
-        customers: "Happy Customers"
+        customers: "Happy Customers",
+        address: "Talegaon Dighe, Loni Road"
     },
     process: {
         title: "Our Quality Process",
@@ -76,10 +77,10 @@ export const en = {
     },
     contact: {
         title: "Contact Us",
-        address: "Near Water Tank, Main Road, City",
+        address: "Talegaon Dighe, Loni Road",
         phone: "Phone: +91 9922616054",
-        whatsapp: "WhatsApp: +91 9922616054",
-        owner: "Owner: Dhansagar Jorvekar"
+        whatsapp: "WhatsApp: +91 9922616054 / 9970092350",
+        owner: "Owner: Punjahari Jorvekar"
     },
     footer: {
         rights: "All Rights Reserved",
