@@ -2,12 +2,13 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, CheckCircle2, Droplets, Snowflake, IceCream } from 'lucide-react';
+import posterImage from '../assets/about-poster.jpg';
 
 const About = () => {
     const { t } = useLanguage();
 
-    // Direct path for the poster image - this is the "Proper" way to handle it
-    const posterPath = "/src/assets/about-poster.jpg";
+    // Proper way to handle assets in Vite is by importing them
+    const posterPath = posterImage;
     const fallbackImage = "https://images.unsplash.com/photo-1559839734-2b71f1e3c7e0?q=80&w=1000";
 
     return (
