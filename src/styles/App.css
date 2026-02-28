@@ -848,13 +848,66 @@ html {
 
 .contact-item {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  align-items: flex-start;
+  gap: 20px;
   font-size: 1.1rem;
+  padding: 20px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: var(--transition);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.contact-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-light);
+  box-shadow: 0 15px 35px rgba(0, 180, 216, 0.15);
+}
+
+.contact-item a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.contact-item a:hover {
+  color: var(--primary);
 }
 
 .contact-icon {
   color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 3px;
+  background: rgba(0, 180, 216, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-details h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.contact-details span, .contact-details a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
 }
 
 .contact-form {

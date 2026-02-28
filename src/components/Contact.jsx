@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { MapPin, Phone, MessageSquare, User } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, User, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
@@ -18,19 +18,38 @@ const Contact = () => {
                 >
                     <div className="contact-item">
                         <MapPin className="contact-icon" />
-                        <span>{t('contact.address')}</span>
+                        <div className="contact-details">
+                            <h4>{t('contact.title_address', { defaultValue: 'Address' })}</h4>
+                            <span>{t('contact.address')}</span>
+                        </div>
                     </div>
                     <div className="contact-item">
                         <Phone className="contact-icon" />
-                        <a href="tel:+919922616054">{t('contact.phone')}</a>
+                        <div className="contact-details">
+                            <h4>{t('contact.title_phone', { defaultValue: 'Phone Number' })}</h4>
+                            <a href="tel:+919922616054">{t('contact.phone')}</a>
+                        </div>
                     </div>
                     <div className="contact-item">
                         <MessageSquare className="contact-icon" />
-                        <a href="https://wa.me/919922616054" target="_blank" rel="noopener noreferrer">{t('contact.whatsapp')}</a>
+                        <div className="contact-details">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/919922616054" target="_blank" rel="noopener noreferrer">{t('contact.whatsapp')}</a>
+                        </div>
+                    </div>
+                    <div className="contact-item">
+                        <Instagram className="contact-icon" />
+                        <div className="contact-details">
+                            <h4>Instagram</h4>
+                            <a href="https://www.instagram.com/dhansagar_aqua?igsh=Y2M4NHN1ZWU3aXRk" target="_blank" rel="noopener noreferrer">@dhansagar_aqua</a>
+                        </div>
                     </div>
                     <div className="contact-item">
                         <User className="contact-icon" />
-                        <span>{t('contact.owner')}</span>
+                        <div className="contact-details">
+                            <h4>{t('contact.title_owner', { defaultValue: 'Owner' })}</h4>
+                            <span>{t('contact.owner')}</span>
+                        </div>
                     </div>
                 </motion.div>
 
